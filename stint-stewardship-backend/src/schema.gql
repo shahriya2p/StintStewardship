@@ -1,0 +1,218 @@
+type Tasks {
+  tasks_id: ID!
+  task_name: String!
+  semester: Float!
+  created_date: String!
+  subject_code: Float!
+  alloted_students: [String!]
+  teacher: String!
+  deadline: String
+}
+
+type PersonalTasks {
+  tasks_id: ID!
+  task_name: String!
+  username: String!
+  content: [String!]
+  alloted_user: String
+  created_date: String
+  deadline: String
+}
+
+type Subject {
+  subject_id: ID!
+  sub_name: String!
+  sub_code: Float!
+  sub_of_sem: Float!
+}
+
+type TasksWithStatusType {
+  todo: [String!]
+  executing: [String!]
+  completed: [String!]
+  review: [String!]
+  finished: [String!]
+}
+
+type Students {
+  stud_id: ID!
+  stud_name: String!
+  stud_roll: Float!
+  semester: Float!
+  username: String!
+  password: String!
+  tasks: [String!]
+  comment: [String!]
+  taskswithstatus: TasksWithStatusType
+  personalTasks: TasksWithStatusType
+}
+
+type File {
+  file_id: String!
+  task_Name: String!
+  stud_id: String!
+  fileName: String!
+  type: String!
+}
+
+type TasksWithStatusTypeForTeacher {
+  todo: [String!]
+  executing: [String!]
+  completed: [String!]
+  review: [String!]
+  finished: [String!]
+}
+
+type Teachers {
+  teacher_id: ID!
+  teacher_name: String!
+  teacher_subject: String!
+  subject_code: Float!
+  assigned_tasks: [String!]
+  personalTasks: TasksWithStatusTypeForTeacher
+}
+
+type loginUserObject {
+  username: String!
+  password: String!
+  accessToken: String
+  role: String!
+}
+
+input UserLoginInput {
+  username: String!
+  password: String!
+  accessToken: String
+  role: String!
+}
+
+type Query {
+  getTasks: [Tasks!]!
+  getTasksByTeacher(getTasks: String!): [Tasks!]!
+  searchTasks(taskName: String!, username: String!): [Tasks!]!
+  searchPersonalTasks(taskName: String!, username: String!): [PersonalTasks!]!
+  checkDeadlines: [Boolean!]!
+  getSubjects: [Subject!]!
+  getSubjectById(subject_code: Float!): Subject!
+  getStudents: [Students!]!
+  getFile(Cred: FileInput!): [File!]!
+  getStudentByUsername(getStudentByName: String!): Students!
+  getAllTodoOfStudent(userName: String!): [Tasks!]!
+  getAllPersonalTodoOfStudent(userName: String!): [PersonalTasks!]!
+  getAllCompletedOfStudent(userName: String!): [Tasks!]!
+  getAllPersonalCompletedOfStudent(userName: String!): [PersonalTasks!]!
+  getAllExecutingOfStudent(userName: String!): [Tasks!]!
+  getAllPersonalExecutingOfStudent(userName: String!): [PersonalTasks!]!
+  getAllReviewOfStudent(userName: String!): [String!]!
+  getAllReviewOfStudentByTeacher(userName: String!): [Tasks!]!
+  getAllPersonalReviewOfStudent(userName: String!): [PersonalTasks!]!
+  getAllFinishedOfStudent(userName: String!): [String!]!
+  getAllPersonalFinishedOfStudent(userName: String!): [PersonalTasks!]!
+  getCountOfPersonalTasks(username: String!): [Float!]!
+  getCountOfSchoolTasks(username: String!): [Float!]!
+  getAllCount(username: String!): [[Float!]!]!
+  getRecent(username: String!): [String!]!
+  getStudentBySem(sem: Float!): [Students!]!
+  getTeachers: [Teachers!]!
+  getTeacher(username: String!): Teachers!
+  getAllFinishedOfTeacher(userName: String!): [PersonalTasks!]!
+  getAllReviewOfTeacher(userName: String!): [PersonalTasks!]!
+  getAllCompletedOfTeacher(userName: String!): [PersonalTasks!]!
+  getAllExecutingOfTeacher(userName: String!): [PersonalTasks!]!
+  getAllTodoOfTeacher(userName: String!): [PersonalTasks!]!
+  getRecentTeacher(username: String!): [String!]!
+  getCountOfTeacherPersonalTasks(username: String!): [Float!]!
+}
+
+input FileInput {
+  stud_id: String!
+  task_name: String!
+}
+
+type Mutation {
+  createTask(createTasksType: CreateTasksType!): Tasks!
+  deleteTask(id: String!): Boolean!
+  deletePersonalTaskForStudent(name: String!, username: String!): Boolean!
+  deletePersonalTaskForTeacher(name: String!, username: String!): Boolean!
+  createTaskForPersonal(createForPersonalUse: CreateCustomTasksType!): PersonalTasks!
+  createSubject(createSubjectInput: CreateSubjectInput!): Subject!
+  deleteSubject(id: String!): Boolean!
+  createStudent(createStudentInput: CreateStudentInput!): Students!
+  commentOnStudentTask(commentOnStudentTask: CommentTaskInput!): Boolean!
+  moveTaskToExecuting(moveToExecution: MoveToStatusInput!): Boolean!
+  movePersonalTaskToExecuting(movePersonalToExecution: MoveToStatusInput!): Boolean!
+  moveTaskToCompleted(moveToCompleted: MoveToStatusInput!): Boolean!
+  movePersonalTaskToCompleted(movePersonalToCompleted: MoveToStatusInput!): Boolean!
+  moveTaskToFinished(moveToFinished: MoveToStatusInput!): Boolean!
+  movePersonalTaskToFinished(moveToFinished: MoveToStatusInput!): Boolean!
+  moveTaskToReview(moveToReview: MoveToStatusInput!): Boolean!
+  movePersonalTaskToReview(moveToReview: MoveToStatusInput!): Boolean!
+  moveTaskToTodo(moveToTodo: MoveToStatusInput!): Boolean!
+  movePersonalTaskToTodo(movePersonalToTodo: MoveToStatusInput!): Boolean!
+  createTeacher(createTeacherInput: CreateTeachersInput!): Teachers!
+  broadcastBasedOnSem(EnterMessageAndSem: BroadcastInput!): String!
+  moveTaskToExecutingForTeacher(moveToExecution: SwitchStatusInput!): Boolean!
+  moveTaskToCompletedForTeacher(moveToCompleted: SwitchStatusInput!): Boolean!
+  moveTaskToFinishedForTeacher(moveToFinished: SwitchStatusInput!): Boolean!
+  moveTaskToReviewForTeacher(moveToReview: SwitchStatusInput!): Boolean!
+  moveTaskToTodoForTeacher(moveToTodo: SwitchStatusInput!): Boolean!
+  userLogin(loginUserInput: UserLoginInput!): loginUserObject!
+}
+
+input CreateTasksType {
+  task_name: String!
+  semester: Float!
+  subject_code: Float!
+  deadline: String
+}
+
+input CreateCustomTasksType {
+  task_name: String!
+  username: String!
+  content: [String!]
+  deadline: String
+}
+
+input CreateSubjectInput {
+  sub_name: String!
+  sub_code: Float!
+  sub_of_sem: Float!
+}
+
+input CreateStudentInput {
+  stud_name: String!
+  stud_roll: Float!
+  semester: Float!
+  username: String!
+  password: String!
+}
+
+input CommentTaskInput {
+  task_name: String!
+  stud_name: String!
+  comment: String!
+}
+
+input MoveToStatusInput {
+  task_name: String!
+  student_roll: Float!
+}
+
+input CreateTeachersInput {
+  teacher_name: String!
+  teacher_subject: String!
+  subject_code: Float!
+  username: String!
+  password: String!
+}
+
+input BroadcastInput {
+  message: String!
+  semester: Float!
+  name_of_teacher: String!
+}
+
+input SwitchStatusInput {
+  task_name: String!
+  teacher_username: String!
+}

@@ -1,0 +1,24 @@
+.toggle {
+  position: absolute;
+  left: 109.575px;
+  z-index: 2;
+  top: 110px;
+  transition: left 0.5s linear;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.34);
+}
+.align {
+  background: #fdd3d3;
+  padding-bottom: 5px;
+  border-left: 0;
+  border-top: 1;
+  opacity: 80%;
+}
+
+.toggle.expand {
+  position: absolute;
+  left: 300px;
+  z-index: 3;
+  top: 110px;
+  transition: left 0.5s linear;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.34);
+}

@@ -1,0 +1,71 @@
+.icon-main {
+  width: 110px;
+  display: list-item;
+}
+.icons {
+  height: 35px;
+  width: 38px;
+}
+.icon-back {
+  padding-left: 5px;
+  padding-top: 13px;
+  margin: 27px;
+  height: 57px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.34);
+  border-radius: 10px;
+  background: #dddd;
+  border: 0px;
+}
+.icon-back:hover {
+  filter: brightness(150%);
+  background: #f16c5f;
+}
+
+.icon-name {
+  position: absolute;
+  font-size: large;
+  left: 100px;
+  padding-top: 4px;
+  border-bottom: 3px solid;
+  opacity: 100%;
+  color: black;
+}
+.icon-name:hover {
+  transform: scale(1.1);
+}
+.icon-container {
+  padding-left: 11.5px;
+  padding-top: 13px;
+  margin: 27px;
+  height: 57px;
+  opacity: 100%;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.34);
+  border-radius: 10px;
+  background: #dddd;
+  display: flex;
+  border: 0px;
+}
+.icon-container:hover {
+  opacity: 100%;
+  background: #f16c5f;
+}
+svg {
+  padding-left: 1px;
+}
+a.active {
+  color: #f16c5f;
+  .icon-container {
+    background: #f16c5f;
+  }
+  .icon-back {
+    background: #f16c5f;
+  }
+}
+a.active:hover {
+  filter: brightness(150%);
+  display: list-item;
+}
+
+.add-task-logo {
+  padding-left: 10px;
+}

@@ -1,0 +1,41 @@
+.menu {
+  position: absolute;
+  display: flex;
+  width: 110px;
+  height: 914px;
+  left: 0px;
+  top: 110px;
+  background: #94d2bd;
+  border-width: 1px 0px 1px 1px;
+  border-style: solid;
+  border-color: #000000;
+  overflow: hidden;
+}
+
+.menu.expanded {
+  background: lightblue;
+  width: 300px;
+  opacity: 80%;
+  z-index: 2;
+  border-width: 1px 1px 1px 1px;
+  transition: width 0.5s linear;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.34);
+}
+
+.menu.short {
+  position: absolute;
+  display: flex;
+  width: 110px;
+  height: 914px;
+  left: 0px;
+  top: 110px;
+  background: lightblue;
+  border-width: 1px 0px 1px 1px;
+  border-style: solid;
+  border-color: #000000;
+  border-width: 1px 1px 1px 1px;
+  overflow: hidden;
+  width: 110px;
+  z-index: 2;
+  transition: width 0.5s linear;
+}

@@ -1,0 +1,35 @@
+import { Tasks } from './tasks.entity';
+import { Repository } from 'typeorm';
+import { CreateTasksType } from './create-tasks.input';
+import { SubjectService } from 'src/subject/subject.service';
+import { StudentsService } from 'src/students/students.service';
+import { Students } from 'src/students/students.entity';
+import { TeachersService } from 'src/teachers/teachers.service';
+import { CreateCustomTasksType } from './task-custom.input.type';
+import { PersonalTasks } from './perosonal.tasks.entity';
+export declare class TasksService {
+    private personalTasksRepository;
+    private tasksRepository;
+    private subjectService;
+    private studentService;
+    private teacherService;
+    constructor(personalTasksRepository: Repository<PersonalTasks>, tasksRepository: Repository<Tasks>, subjectService: SubjectService, studentService: StudentsService, teacherService: TeachersService);
+    createTask(createTasksType: CreateTasksType): Promise<Tasks>;
+    getTasks(): Promise<Tasks[]>;
+    getTasksBySem(semester: number): Promise<string[]>;
+    assignTasksToNewStudent(student: Students): Promise<void>;
+    deleteTask(id: string): Promise<boolean>;
+    deletePersonalTaskForStud(name: string, username: string): Promise<boolean>;
+    deletePersonalTaskForTeacher(name: string, username: string): Promise<boolean>;
+    searchTaskByName(task_name: string): Promise<Tasks>;
+    searchT(task_name: string, username: string): Promise<Tasks[]>;
+    searchPT(task_name: string, username: string): Promise<PersonalTasks[]>;
+    searchPersonalTaskByName(task_name: string): Promise<PersonalTasks>;
+    createTaskForPersonal(createCustomTasksInput: CreateCustomTasksType): Promise<PersonalTasks>;
+    getSemFromTasks(): Promise<number[]>;
+    checkDeadlines(): Promise<void>;
+    getPersonalTaskByName(task_name: string): Promise<PersonalTasks>;
+    getPersonalTaskByNameUsername(task_name: string, username: string): Promise<PersonalTasks>;
+    getTaskByName(name: string): Promise<Tasks>;
+    getTasksByTeacher(username: string): Promise<Tasks[]>;
+}
